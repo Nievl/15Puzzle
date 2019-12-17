@@ -1,11 +1,12 @@
 import React from "react";
+import { Board } from "./Board";
 
-function App() {
+const App = () => {
   return (
-    <>
+    <div className="app">
       <header>15 Puzzle</header>
       <main>
-        <div className="board">board</div>
+        <Board />
         <div className="help">перемещая костяшки по коробке, добиться упорядочивания их по номерам, желательно сделав как можно меньше перемещений.</div>
       </main>
       <footer>
@@ -13,8 +14,8 @@ function App() {
           &copy; 2019, Nievl
         </a>
       </footer>
-    </>
+    </div>
   );
-}
+};
 
 export default App;

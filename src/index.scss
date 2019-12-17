@@ -17,12 +17,20 @@ body {
   div#root {
     width: 100%;
     height: 100%;
+    .app {
+      width: 100%;
+      height: 100%;
+    }
   }
   header {
     height: 7%;
     display: flex;
     background-color: #8e8e8e;
   }
+
+  $border: 1px;
+  $padding: 2px;
+
   main {
     height: 86%;
     display: flex;
@@ -30,10 +38,32 @@ body {
     justify-content: center;
     align-items: center;
     .board {
-      height: 500px;
-      width: 500px;
+      height: calc(500px + 2 * #{$border + $padding + 1});
+      width: calc(500px + 2 * #{$border + $padding + 1});
+      padding: $padding;
       border: 0.05em solid #999999;
       box-shadow: 0 8px 16px 0 #3e3e3e33;
+      // display: block;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      .cube {
+        height: 125px;
+        width: 125px;
+        min-height: 125px;
+        min-width: 125px;
+        background-color: #1900ff;
+        color: #fff;
+        border: $border solid #999999;
+        box-shadow: 0 8px 16px 0 #3e3e3e33;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &.zero {
+          background-color: #000;
+        }
+      }
     }
     background-color: #c4c4c4;
   }
