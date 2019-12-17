@@ -1,28 +1,30 @@
-import React from "react";
-import { init } from "./logic/index";
+import React, { useState } from "react";
+import { init, replaceValue, validateValue } from "./logic/index";
 import { dataSetExtractor } from "./helpers/extractors";
 
 export const Board = () => {
-  const cubs = init() || [];
-  const toggle = e => {
-    const value = dataSetExtractor(e.target, "value");
-    alert(value);
+  const [cubes, setCubes] = useState(init());
+  const handleClick = e => {
+    const value = +dataSetExtractor(e.target, "value");
+    const newValues = replaceValue(cubes, value);
+    setCubes(newValues);
+    const isValid = validateValue(newValues);
+    if (isValid) alert("Пазл сложен");
   };
   return (
     <div className="board">
-      {cubs.map(cube => (
-        <Cube cube={cube} onclick={toggle} />
+      {cubes.map(cube => (
+        <Cube cube={cube} onclick={handleClick} key={cube} />
       ))}
     </div>
   );
 };
 
 const Cube = ({ cube, onclick }) => {
-  const { value } = cube;
-  const clN = value ? "" : "zero";
-  const number = value || "";
+  const clN = cube ? "" : "zero";
+  const number = cube || "";
   return (
-    <div className={"cube " + clN} data-value={value} onClick={onclick}>
+    <div className={"cube " + clN} data-value={cube} onClick={onclick}>
       {number}
     </div>
   );
