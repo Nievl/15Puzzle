@@ -7,7 +7,7 @@ const App = () => {
       <header>15 Puzzle</header>
       <main>
         <Board />
-        <div className="help">перемещая костяшки по коробке, добиться упорядочивания их по номерам, желательно сделав как можно меньше перемещений.</div>
+        <div className="help">Перемещая костяшки по коробке, добиться упорядочивания их по номерам, желательно сделав как можно меньше перемещений.</div>
       </main>
       <footer>
         <a href="https://github.com/Nievl/15Puzzle" target="_blank" rel="noopener noreferrer">
