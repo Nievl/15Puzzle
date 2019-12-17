@@ -10,25 +10,30 @@ export const Board = () => {
   const handleClick = e => {
     const value = +dataSetExtractor(e.target, "value");
     const newValues = replaceValue(cubes, value);
-    setCubes(newValues);
-    setMoves(moves + 1);
-    const isValid = validateValue(newValues);
-    if (isValid) alert("Пазл сложен");
+    if (newValues) {
+      setCubes(newValues);
+      setMoves(moves + 1);
+      const isValid = validateValue(newValues);
+      if (isValid) alert("Пазл сложен");
+    }
   };
 
-  const reset = () => setCubes(init());
+  const reset = () => {
+    setCubes(init());
+    setMoves(0);
+  };
 
   return (
-    <>
+    <div className="panel">
+      <div className="counter">Количество перемещений: {moves}</div>
+      <button type="button" onClick={reset}>
+        Сброс
+      </button>
       <div className="board">
         {cubes.map(cube => (
           <Cube cube={cube} onclick={handleClick} key={cube} />
         ))}
       </div>
-      <div>Количество перемещений {moves}</div>
-      <button type="button" onClick={reset}>
-        Сброс
-      </button>
-    </>
+    </div>
   );
 };

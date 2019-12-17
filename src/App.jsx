@@ -4,7 +4,9 @@ import { Board } from "./Board";
 const App = () => {
   return (
     <div className="app">
-      <header>15 Puzzle</header>
+      <header>
+        <h3>15 Puzzle</h3>
+      </header>
       <main>
         <Board />
         <div className="help">Перемещая костяшки по коробке, добиться упорядочивания их по номерам, желательно сделав как можно меньше перемещений.</div>

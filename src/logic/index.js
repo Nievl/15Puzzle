@@ -19,11 +19,35 @@ export const validateValue = (values = []) => {
   return a;
 };
 
+const getX = index => index % 4;
+const getY = index => Math.floor(index / 4);
+
+const isTouchable = (blackIndex, currIndex) => {
+  const cube = {
+    x: getX(currIndex),
+    y: getY(currIndex),
+  };
+  const black = {
+    x: getX(blackIndex),
+    y: getY(blackIndex),
+  };
+  const deltaX = Math.abs(cube.x - black.x);
+  const deltaY = Math.abs(cube.y - black.y);
+  console.log("delta  ", deltaX, ":", deltaY);
+  if ((deltaX === 0 || deltaY === 0) && (deltaX === 1 || deltaY === 1)) {
+    return true;
+  }
+  return false;
+};
+
 export const replaceValue = (values = [], value) => {
-  const zeroIndex = values.indexOf(0);
-  const clickIndex = values.indexOf(value);
-  const newValues = [...values];
-  newValues[zeroIndex] = value;
-  newValues[clickIndex] = 0;
-  return newValues;
+  const blackIndex = values.indexOf(0);
+  const currIndex = values.indexOf(value);
+  if (isTouchable(blackIndex, currIndex)) {
+    const newValues = [...values];
+    newValues[blackIndex] = value;
+    newValues[currIndex] = 0;
+    return newValues;
+  }
+  return false;
 };
