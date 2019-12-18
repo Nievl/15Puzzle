@@ -5,7 +5,7 @@ Test code for interview. This is implementation a game 15Puzzle. The main mean i
 The build project placed in directory ./build
 
 The development ver you can get if run: 
- -sudoyarn or npm install
+ -sudo yarn or npm install
  -sudo yarn start of npm run start
  
  For checking test run -sudo yarn test(npm run test)
