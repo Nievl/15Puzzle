@@ -6,6 +6,14 @@ describe("validate test", () => {
     expect(result).toBe(true);
   });
   it("should return true", () => {
+    const result = validateValue([1, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    expect(result).toBe(true);
+  });
+  it("should return false", () => {
+    const result = validateValue([2, 0, 1, 3, 4, 5, 6, 7, 8, 9, 10]);
+    expect(result).toBe(false);
+  });
+  it("should return true", () => {
     const result = validateValue([1, 2, 3, 4, 5, 6, 0, 7, 8, 9, 10]);
     expect(result).toBe(true);
   });

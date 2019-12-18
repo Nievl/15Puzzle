@@ -1,25 +1,35 @@
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
-
-html {
+@mixin fullView {
   width: 100%;
   height: 100%;
 }
+
+$border: 1px;
+$padding: 2px;
+$side: 125px;
+
+@mixin border {
+  border: $border solid #999999;
+  box-shadow: 0 8px 16px 0 #3e3e3e33;
+}
+
+html {
+  @include fullView();
+}
+
 body {
+  @include fullView();
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   div#root {
-    width: 100%;
-    height: 100%;
+    @include fullView();
     .app {
-      width: 100%;
-      height: 100%;
+      @include fullView();
     }
   }
   header {
@@ -31,9 +41,6 @@ body {
     }
   }
 
-  $border: 1px;
-  $padding: 2px;
-
   main {
     height: 86%;
     display: flex;
@@ -41,13 +48,29 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #c4c4c4;
+    .modal {
+      height: 30vh;
+      width: 30vw;
+      position: absolute;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+      z-index: 99;
+      @include border();
+      border-radius: 0.25rem;
+    }
     .panel {
-      width: 50%;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      &.block {
+        pointer-events: none;
+        opacity: 0.4;
+      }
       .board {
         height: calc(500px + 2 * #{$border + $padding + 1});
         width: calc(500px + 2 * #{$border + $padding + 1});
@@ -59,14 +82,13 @@ body {
         justify-content: flex-start;
         align-items: flex-start;
         .cube {
-          height: 125px;
-          width: 125px;
-          min-height: 125px;
-          min-width: 125px;
+          height: $side;
+          width: $side;
+          min-height: $side;
+          min-width: $side;
           background-color: #1900ff;
           color: #fff;
-          border: $border solid #999999;
-          box-shadow: 0 8px 16px 0 #3e3e3e33;
+          @include border();
           display: flex;
           justify-content: center;
           align-items: center;
@@ -80,30 +102,31 @@ body {
         margin: 1em;
         text-align: center;
       }
-      button {
-        color: #fff;
-        margin: 1em;
-        background-color: #007bff;
-        border-color: #007bff;
-        text-align: center;
-        vertical-align: middle;
-        border: 1px solid transparent;
-        padding: 0.375rem 0.75rem;
-        font-size: 1rem;
-        line-height: 1.5;
-        border-radius: 0.25rem;
-        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        &:focus {
-          outline: 1px dotted;
-          outline: 5px auto -webkit-focus-ring-color;
-          box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        }
+    }
+    button {
+      color: #fff;
+      margin: 1em;
+      background-color: #007bff;
+      border-color: #007bff;
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid transparent;
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: 0.25rem;
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      &:focus {
+        outline: 1px dotted;
+        outline: 5px auto -webkit-focus-ring-color;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
       }
     }
   }
   footer {
     height: 7%;
     display: flex;
+    align-items: center;
     justify-content: flex-end;
     padding-right: 1em;
     background-color: #8e8e8e;

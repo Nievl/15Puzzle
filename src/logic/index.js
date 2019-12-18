@@ -1,7 +1,6 @@
 export const init = () => {
   const size = 4;
-  const points = new Array(size ** 2).fill(1);
-  const cubs = points.map((el, i) => i);
+  const cubs = Array.from(Array(size ** 2), (_, i) => i);
   return shuffle(cubs);
 };
 
@@ -13,7 +12,13 @@ export const shuffle = (arr = []) => {
 export const validateValue = values => {
   if (Array.isArray(values)) {
     return values.every((value, i, arr) => {
-      if (i !== 0 && value !== 0) {
+      if (i === 0) {
+        if (arr[1] === 0) {
+          return value < arr[2];
+        }
+        return value < arr[1];
+      }
+      if (value !== 0) {
         return value > arr[i - 1];
       }
       return true;
@@ -38,7 +43,7 @@ export const isTouchable = (blackIndex, currIndex) => {
     const deltaX = Math.abs(cube.x - black.x);
     const deltaY = Math.abs(cube.y - black.y);
     if ((deltaX === 0 || deltaY === 0) && (deltaX === 1 || deltaY === 1)) {
-      return true;
+      return true; // находится на расстояние 1 клетки
     }
   }
   return false;
@@ -48,9 +53,11 @@ export const replaceValue = (values = [], value) => {
   const blackIndex = values.indexOf(0);
   const currIndex = values.indexOf(value);
   if (isTouchable(blackIndex, currIndex)) {
-    const newValues = [...values];
-    newValues[blackIndex] = value;
-    newValues[currIndex] = 0;
+    const newValues = values.map((oldValue, index) => {
+      if (oldValue === 0) return value;
+      if (oldValue === value) return 0;
+      return oldValue;
+    });
     return newValues;
   }
   return false;
